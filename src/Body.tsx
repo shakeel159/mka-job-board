@@ -33,8 +33,8 @@ function Body() {
         job.Title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         job.Company?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         job.Location?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        job.JobType?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        job.describtion?.toLowerCase().includes(searchTerm.toLowerCase())
+        job.JobType?.toLowerCase().includes(searchTerm.toLowerCase())
+        //job.describtion?.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     return <>
