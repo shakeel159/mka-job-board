@@ -8,17 +8,18 @@ function Body() {
     const [jobs, setJobs] = useState<any[]>([]);
 
     useEffect(() => {
-        fetch(`${process.env.NODE_ENV === 'production' ? '/mka-job-board/' : ''}Jobs.csv`)
+        fetch('/Jobs.csv')
             .then(response => response.text())
             .then(csvText => {
                 const parsedData = Papa.parse(csvText, { header: true, dynamicTyping: true });
     
+                // Ensure 'description' and 'Contact' fields are included
                 const jobsWithDates = parsedData.data.map((job: any) => ({
                     ...job,
                     DatePosted: job.DatePosted ? new Date(job.DatePosted) : new Date(),
-                    description: job.Description || 'No description available',
+                    description: job.Description || 'No description available', // Consistent property name: 'description'
                     Requirements: job.Requirements || 'No requirements listed',
-                    Contact: job.Contact || 'No contact information',
+                    Contact: job.Contact || 'No contact information',  // Add Contact field
                 }));
     
                 setJobs(jobsWithDates);
