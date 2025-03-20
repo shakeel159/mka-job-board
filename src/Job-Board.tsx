@@ -9,7 +9,7 @@ interface OverlayProps {
         Location: string;
         JobType: string;
         Salary: number;
-        describtion: string;
+        description: string;
         DatePosted: Date;
         Requirements: string;
         Contact: string;
@@ -28,7 +28,7 @@ function Board({ onClose, job }: OverlayProps) {
             <h3>Salary: ${job.Salary.toLocaleString()}</h3>
             <h4>Date Posted: {job.DatePosted?.toLocaleDateString() || "N/A"}</h4>
             <h2>Job Describtion: </h2>
-            <p>{job.describtion}</p>
+            <p>{job.description}</p>
             <h2>Requirements: </h2>
             {requirements.length > 0 ? (
           <ul>
@@ -40,6 +40,7 @@ function Board({ onClose, job }: OverlayProps) {
             <p>No requirements listed.</p>  // Handle missing requirements
             )}
             <h2>How To Apply: </h2>
+            <p>List of steps or email suggested for user to fallow in order to apply for job</p>
             <div className='Bottom-Buttons'>
                 <button id="Button" onClick={onClose}>Close</button>
                 <button id="Apply-Button">Apply</button>

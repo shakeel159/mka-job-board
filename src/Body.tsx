@@ -1,61 +1,75 @@
-
 import { useState, useEffect } from 'react';
 import Papa from 'papaparse';
 import Cards from './Card.tsx';
 import './Body.css';
 
-
-
 function Body() {
     const [searchTerm, setSearchTerm] = useState('');
     const [jobs, setJobs] = useState<any[]>([]);
-    const datePosted = new Date('2025-03-14');
 
     useEffect(() => {
         fetch('/Jobs.csv')
             .then(response => response.text())
             .then(csvText => {
                 const parsedData = Papa.parse(csvText, { header: true, dynamicTyping: true });
-
-                // Ensure the DatePosted field is converted into Date
+    
+                // Ensure 'description' and 'Contact' fields are included
                 const jobsWithDates = parsedData.data.map((job: any) => ({
                     ...job,
-                    DatePosted: job.DatePosted ? new Date(job.DatePosted) : new Date()
+                    DatePosted: job.DatePosted ? new Date(job.DatePosted) : new Date(),
+                    description: job.Description || 'No description available', // Consistent property name: 'description'
+                    Requirements: job.Requirements || 'No requirements listed',
+                    Contact: job.Contact || 'No contact information',  // Add Contact field
                 }));
-
+    
                 setJobs(jobsWithDates);
             })
             .catch(error => console.error("Error loading CSV:", error));
     }, []);
 
-    // Filter jobs dynamically
+    // Filter jobs dynamically based on searchTerm
     const filteredJobs = jobs.filter(job =>
         job.Title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         job.Company?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         job.Location?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         job.JobType?.toLowerCase().includes(searchTerm.toLowerCase())
-        //job.describtion?.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    return <>
+    return (
         <div className='Body-Content'>
             <div className='Container'>
-                <input type='text' placeholder='Search...' className='search-bar' 
+                <input 
+                    type='text' 
+                    placeholder='Search...' 
+                    className='search-bar' 
                     value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}>
-                </input>
+                    onChange={(e) => setSearchTerm(e.target.value)} 
+                />
             </div>
             <div className='Card-Containers'>
                 {jobs.length === 0 ? (
-                    <p>Loading jobs...</p>  // Prevents "No jobs found" message before data loads
+                    <p>Loading jobs...</p>
                 ) : filteredJobs.length > 0 ? (
-                    filteredJobs.map((job, index) => <Cards key={index} {...job} />)
+                    filteredJobs.map((job, index) => (
+                        <Cards
+                            key={index}
+                            Title={job.Title}
+                            Company={job.Company}
+                            Location={job.Location}
+                            JobType={job.JobType}
+                            Salary={job.Salary}
+                            description={job.description}  // Use 'description' here
+                            Requirements={job.Requirements}
+                            DatePosted={job.DatePosted}
+                            Contact={job.Contact}  // Make sure to include 'Contact' here
+                        />
+                    ))
                 ) : (
                     <p>No jobs found.</p>
                 )}
             </div>
         </div>
-    </>
+    );
 }
 
 export default Body;

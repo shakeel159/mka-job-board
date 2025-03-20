@@ -11,14 +11,17 @@ import { useState } from 'react';
 
 
 interface CardProps {
-    Title: String;
-    Company: String;
-    Location: String;
+    Title: string;
+    Company: string;
+    Location: string;
     JobType: string;
     Salary: number;
-    describtion: String;
+    description: string;  // Ensure that you use the correct spelling
+    Requirements: string;
     DatePosted: Date;
+    Contact: string; // Add 'Contact' field here
 }
+
 function Card(props: CardProps) {
     const [isOverlayOpen, setIsOverlayOpen] = useState(false);
 
@@ -28,15 +31,15 @@ function Card(props: CardProps) {
                 <div className='Left-Side'>
                     <h1>{props.Title}</h1>
                     <div className='sub-Container'>
-                        <img src='./public/corporate-building.png' alt="Company Logo" />
+                        <img src='/corporate-building.png' alt="Company Logo" />
                         <h3>{props.Company}</h3>
                     </div>
                     <div className='sub-Container'>
-                        <img src='./public/pin.png' alt="Location Logo" />
+                        <img src='/pin.png' alt="Location Logo" />
                         <h3>{props.Location}</h3>
                     </div>
                     <div className='sub-Container'>
-                        <img src='./public/dollar-symbol.png' alt="USD Logo" />
+                        <img src='/dollar-symbol.png' alt="USD Logo" />
                         <h3>Salary: ${props.Salary.toLocaleString()}</h3>
                     </div>
                 </div>
@@ -51,6 +54,5 @@ function Card(props: CardProps) {
         </>
     );
 }
-
 
 export default Card;

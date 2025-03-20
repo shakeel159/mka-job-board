@@ -17,7 +17,7 @@
     background: white;
     padding: 20px;
     border-radius: 10px;
-    width: 80vw;
+    width: 40vw;
     height: 80vh;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
     display: flex;
@@ -38,10 +38,45 @@
 .Bottom-Buttons {
     display: flex;
     justify-content: end; 
-    gap: 10px; 
+    gap: 20px; 
     margin-top: auto; 
 }
 #Apply-Button {
     background-color: aqua;
     padding: 2%;
+}
+
+
+@media screen and (max-width: 768px) {
+
+    .Board-Content {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        width: 80vw;
+        height: 80vh;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .Board-Content h3{
+        font-family: Arial, sans-serif;
+        font-weight: 300;
+        font-size: .9em;
+        color: hsl(0, 0%, 47%);
+        line-height: 1.5;
+    }
+    .Board-Content h1{
+        font-family: Arial, sans-serif;
+        font-weight: 300;
+        font-size: 1.5em;
+    }
+    .Bottom-Buttons {
+        display: flex;
+        justify-content: end; 
+        gap: 10px; 
+        margin-top: auto; 
+    }
+
 }
