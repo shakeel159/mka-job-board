@@ -8,7 +8,8 @@ function Body() {
     const [jobs, setJobs] = useState<any[]>([]);
 
     useEffect(() => {
-        fetch(`${process.env.NODE_ENV === 'production' ? '/mka-job-board/' : ''}Jobs.csv`)
+        // Fetch the Jobs.csv directly from the public folder
+        fetch('/Jobs.csv')
             .then(response => response.text())
             .then(csvText => {
                 const parsedData = Papa.parse(csvText, { header: true, dynamicTyping: true });
@@ -23,6 +24,7 @@ function Body() {
             })
             .catch(error => console.error("Error loading CSV:", error));
     }, []);
+
 
     // Filter jobs dynamically based on searchTerm
     const filteredJobs = jobs.filter(job =>
