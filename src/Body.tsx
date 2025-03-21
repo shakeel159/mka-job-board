@@ -8,7 +8,7 @@ function Body() {
     const [jobs, setJobs] = useState<any[]>([]);
 
     useEffect(() => {
-        const csvUrl = `${import.meta.env.BASE_URL}Jobs.csv`;
+        const csvUrl = `/Jobs.csv`;
         console.log('Fetching from:', csvUrl);  // Log the URL to check
         fetch(csvUrl)
             .then(response => response.text())
