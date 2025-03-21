@@ -8,9 +8,7 @@ function Body() {
     const [jobs, setJobs] = useState<any[]>([]);
 
     useEffect(() => {
-        const csvUrl = `/Jobs.csv`;
-        console.log('Fetching from:', csvUrl);  // Log the URL to check
-        fetch(csvUrl)
+        fetch(`${import.meta.env.BASE_URL}Jobs.csv`)
             .then(response => response.text())
             .then(csvText => {
                 const parsedData = Papa.parse(csvText, { header: true, dynamicTyping: true });
