@@ -8,20 +8,17 @@ function Body() {
     const [jobs, setJobs] = useState<any[]>([]);
 
     useEffect(() => {
-        fetch('/Jobs.csv')
+        fetch(`${import.meta.env.BASE_URL}Jobs.csv`)
             .then(response => response.text())
             .then(csvText => {
                 const parsedData = Papa.parse(csvText, { header: true, dynamicTyping: true });
-    
-                // Ensure 'description' and 'Contact' fields are included
                 const jobsWithDates = parsedData.data.map((job: any) => ({
                     ...job,
                     DatePosted: job.DatePosted ? new Date(job.DatePosted) : new Date(),
-                    description: job.Description || 'No description available', // Consistent property name: 'description'
+                    description: job.Description || 'No description available',
                     Requirements: job.Requirements || 'No requirements listed',
-                    Contact: job.Contact || 'No contact information',  // Add Contact field
+                    Contact: job.Contact || 'No contact information',
                 }));
-    
                 setJobs(jobsWithDates);
             })
             .catch(error => console.error("Error loading CSV:", error));
