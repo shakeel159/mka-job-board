@@ -31,15 +31,15 @@ function Card(props: CardProps) {
                 <div className='Left-Side'>
                     <h1>{props.Title}</h1>
                     <div className='sub-Container'>
-                        <img src={'/corporate-building.png'} alt="Company Logo" />
+                        <img src={`${import.meta.env.BASE_URL}corporate-building.png`} alt="Company Logo" />
                         <h3>{props.Company}</h3>
                     </div>
                     <div className='sub-Container'>
-                        <img src='/pin.png' alt="Location Logo" />
+                        <img src={`${import.meta.env.BASE_URL}pin.png`} alt="Location Logo" />
                         <h3>{props.Location}</h3>
                     </div>
                     <div className='sub-Container'>
-                        <img src='/dollar-symbol.png' alt="USD Logo" />
+                        <img src={`${import.meta.env.BASE_URL}dollar-symbol.png`} alt="USD Logo" />
                         <h3>Salary: ${props.Salary.toLocaleString()}</h3>
                     </div>
                 </div>
