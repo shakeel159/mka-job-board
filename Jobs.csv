@@ -1,0 +1,4 @@
+Title,Company,Location,JobType,Salary,describtion,DatePosted,Requirements,Contacts
+Front End Developer,MKA USA,Chicago,On-Site,90000,Front End Development role focused on maintaining website UI with React + Vite framework,2025-03-14,"Basic Understanding of HTML,CSS,JavaScript",Contact@mka.com
+Back End Developer,TechCorp,New York,Remote,100000,Back End Development using Node.js and MongoDB,2025-03-14,"Strong background in C# and API understanding",Contact@mka.com
+Full Stack Developer,InnovateX,San Francisco,Hybrid,120000,Full Stack Developer role using React and Node.js,2025-03-14,"5+ years of work experience, strong understanding of C#, strong understanding of back end strategies",Contact@mka.com
