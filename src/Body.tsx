@@ -8,7 +8,7 @@ function Body() {
     const [jobs, setJobs] = useState<any[]>([]);
 
     useEffect(() => {
-        fetch(`${import.meta.env.BASE_URL}Jobs.csv`)
+        fetch(`${import.meta.env.BASE_URL}jobs.csv`)
             .then(response => response.text())
             .then(csvText => {
                 const parsedData = Papa.parse(csvText, { header: true, dynamicTyping: true });
