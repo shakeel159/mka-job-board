@@ -8,7 +8,8 @@ function Body() {
     const [jobs, setJobs] = useState<any[]>([]);
 
     useEffect(() => {
-        const filePath = process.env.NODE_ENV === 'production' ? '/mka-job-board/Jobs.csv' : '/Jobs.csv'; 
+        const filePath = '/Jobs.csv'; // Direct path to the CSV file in the public folder
+        console.log('Fetching CSV from:', filePath);  // Log the path you're fetching from
         fetch(filePath)
             .then(response => response.text())
             .then(csvText => {
