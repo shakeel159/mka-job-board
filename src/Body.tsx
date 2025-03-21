@@ -8,10 +8,20 @@ function Body() {
     const [jobs, setJobs] = useState<any[]>([]);
 
     useEffect(() => {
-        const filePath = '/Jobs.csv'; // Direct path to the CSV file in the public folder
-        console.log('Fetching CSV from:', filePath);  // Log the path you're fetching from
+        // Adjust file path for production with the base path
+        const filePath = process.env.NODE_ENV === 'production' 
+            ? '/mka-job-board/Jobs.csv'  // Production path with the base URL
+            : '/Jobs.csv';               // Development path (directly from public folder)
+
+        console.log('Fetching CSV from:', filePath); // Log to verify the correct path
+        
         fetch(filePath)
-            .then(response => response.text())
+            .then(response => {
+                if (!response.ok) {
+                    console.error(`Error fetching CSV: ${response.status}`);
+                }
+                return response.text();
+            })
             .then(csvText => {
                 const parsedData = Papa.parse(csvText, { header: true, dynamicTyping: true });
                 const jobsWithDates = parsedData.data.map((job: any) => ({
@@ -26,8 +36,6 @@ function Body() {
             .catch(error => console.error("Error loading CSV:", error));
     }, []);
 
-
-    // Filter jobs dynamically based on searchTerm
     const filteredJobs = jobs.filter(job =>
         job.Title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         job.Company?.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -58,10 +66,10 @@ function Body() {
                             Location={job.Location}
                             JobType={job.JobType}
                             Salary={job.Salary}
-                            description={job.description}  // Use 'description' here
+                            description={job.description} 
                             Requirements={job.Requirements}
                             DatePosted={job.DatePosted}
-                            Contact={job.Contact}  // Make sure to include 'Contact' here
+                            Contact={job.Contact}
                         />
                     ))
                 ) : (
